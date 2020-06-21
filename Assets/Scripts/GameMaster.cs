@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour
@@ -10,7 +11,10 @@ public class GameMaster : MonoBehaviour
     public Slider yslider;
     public Slider zslider;
     public Button FindGeoButton;
-    public float minTargetDist = 50;
+    public float minTargetDist = 10;
+    public float riseSpeed = 0.1f;
+    public GameObject target;
+
     private static GameMaster _instance;
     public static GameMaster Instance
     {
@@ -34,6 +38,17 @@ public class GameMaster : MonoBehaviour
         {
             FindGeo(false);
         }
+
+        if (Vector3.Distance(Camera.main.transform.position, target.transform.position) < minTargetDist)
+        {
+            FindGeo(false);
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+            transform.position += Vector3.up * riseSpeed * Time.deltaTime;
+        else if (Input.GetKey(KeyCode.LeftControl))
+            transform.position += -Vector3.up * riseSpeed * Time.deltaTime;
+
     }
 
     public void FindGeo(bool enable)
@@ -42,8 +57,13 @@ public class GameMaster : MonoBehaviour
         Camera.main.GetComponent<LerpCam>().enabled = enable;
     }
 
-    public void AddForce(Vector3 force)
+    public void ApplyForce()
     {
+        target.GetComponent<Rigidbody>().AddForce(new Vector3(xslider.value, yslider.value, zslider.value));
+    }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(target.transform.position, target.transform.position + new Vector3(xslider.value, yslider.value, zslider.value));        
     }
 }

@@ -208,7 +208,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 156144687}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 222657761}
+        m_MethodName: ApplyForce
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &156144687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,7 +366,9 @@ MonoBehaviour:
   yslider: {fileID: 280708998}
   zslider: {fileID: 1377782755}
   FindGeoButton: {fileID: 1617758950}
-  minTargetDist: 50
+  minTargetDist: 10
+  riseSpeed: 10
+  target: {fileID: 884689638}
 --- !u!1 &241075998
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,8 +531,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 1018403269}
   m_HandleRect: {fileID: 1727028984}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: -1000
+  m_MaxValue: 1000
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -956,7 +969,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5b5fdf3714f727c41858a61895371a8b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 55.1
+      value: 76.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b5fdf3714f727c41858a61895371a8b,
         type: 3}
@@ -1177,8 +1190,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 1803672039}
   m_HandleRect: {fileID: 1585740564}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: -1000
+  m_MaxValue: 1000
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -1419,7 +1432,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208066301}
   m_LocalRotation: {x: -0, y: -0.7044484, z: -0, w: 0.70975524}
-  m_LocalPosition: {x: 102.7, y: 0, z: 33.9}
+  m_LocalPosition: {x: 102, y: 12, z: -39.8}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 2895742934712986429}
@@ -1543,8 +1556,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 1738706229}
   m_HandleRect: {fileID: 1387855130}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: -1000
+  m_MaxValue: 1000
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -2478,22 +2491,22 @@ PrefabInstance:
     - target: {fileID: 6141750961475219240, guid: 37bbe23c17398419cbc8674f5c5dbccb,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 7.71e-43
+      value: 3.024685e+24
       objectReference: {fileID: 0}
     - target: {fileID: 6141750961475219240, guid: 37bbe23c17398419cbc8674f5c5dbccb,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -3.0262858e+26
+      value: 4.3712434e+24
       objectReference: {fileID: 0}
     - target: {fileID: 6141750961475219240, guid: 37bbe23c17398419cbc8674f5c5dbccb,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 7.71e-43
+      value: 0.0000000093265164
       objectReference: {fileID: 0}
     - target: {fileID: 6141750961475219240, guid: 37bbe23c17398419cbc8674f5c5dbccb,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: -3.032478e+26
+      value: 1.1705998e-19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37bbe23c17398419cbc8674f5c5dbccb, type: 3}
@@ -2807,7 +2820,7 @@ PrefabInstance:
     - target: {fileID: 23363507218070258, guid: 1ab0847a8e46b4c4fa728256231f88eb,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 33478687144416888, guid: 1ab0847a8e46b4c4fa728256231f88eb,
         type: 3}
@@ -3575,7 +3588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1040961582426892, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4478995129147352, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3624,7 +3637,7 @@ PrefabInstance:
     - target: {fileID: 23339501637627632, guid: 6d79ad5f5edb537448c2c13e54ffac88,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 33624370962103636, guid: 6d79ad5f5edb537448c2c13e54ffac88,
         type: 3}
