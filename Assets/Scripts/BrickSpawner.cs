@@ -8,23 +8,94 @@ public class BrickSpawner : MonoBehaviour
     public Transform st;
     public GameObject brick;
     public List<GameObject> bricks;
+    Vector3 sPos;
 
     // Start is called before the first frame update
     void Start()
     {
-        Vector3 sPos = st.position;
-        bricks = new List<GameObject>();
-        for (int n = 0; n < 10; n++)
-        {
-            bricks.Add(Instantiate(brick, new Vector3(sPos.x+ 10*n, sPos.y, sPos.z), Quaternion.identity));
-        }
-        GameMaster.Instance.target = bricks[0];
-        Camera.main.GetComponent<SmoothFollow>().target = bricks[0].transform;
+        sPos = st.position; //find starting location from transform
+        Spawn5(); //run spawn function
+        GameMaster.Instance.target = bricks[0]; //assuming brick list is set, sets the game master to disable camera follow
+        Camera.main.GetComponent<SmoothFollow>().target = bricks[0].transform; //Set camera to follow the first brick spawned
     }
 
-    // Update is called once per frame
-    void Update()
+    void Spawn1()
     {
-        
+        bricks = new List<GameObject>();
+        for (int x = 0; x < 10; x++)
+        {
+            bricks.Add(Instantiate(brick, new Vector3(sPos.x + 10 * x, sPos.y, sPos.z), Quaternion.identity));
+        }
+    }
+
+    void Spawn2()
+    {
+        bricks = new List<GameObject>();
+        for (int x = 0; x < 10; x++)
+        {
+            for (int z = 0; z < 10; z++)
+            {
+                bricks.Add(Instantiate(brick, new Vector3(sPos.x + 10 * x, sPos.y, sPos.z + 10 * z), Quaternion.identity));
+            }
+        }
+    }
+
+    void Spawn3()
+    {
+        float offset = 2;
+        bricks = new List<GameObject>();
+        for (int x = 0; x < 10; x++)
+        {
+            for (int y = 0; y < 10; y++)
+            {
+                for (int z = 0; z < 10; z++)
+                {                    
+                    if (x < y || z < y || x > 10 -y || z > 10 -y)
+                    {
+
+                    }
+                    else
+                    {
+                        bricks.Add(Instantiate(brick, new Vector3(sPos.x + offset * x, sPos.y + offset * y, sPos.z + offset * z), Quaternion.identity));
+                    }                  
+                }
+            }
+        }
+    }
+
+    void Spawn4()
+    {
+        float offset = 1.8f;
+        bricks = new List<GameObject>();
+        for (int x = 0; x < 10; x++)
+        {
+            for (int z = 0; z < 10; z++)
+            {
+                bricks.Add(Instantiate(brick, new Vector3(sPos.x + offset * x, sPos.y, sPos.z + offset * z), Quaternion.Euler(0, 0, 36)));                
+            }
+        }
+    }
+
+    void Spawn5()
+    {
+        float offset = 1.75f;
+        bricks = new List<GameObject>();
+        for (int x = 0; x < 10; x++)
+        {
+            for (int z = 0; z < 10; z++)
+            {
+                for (int y = 0; y < 10; y++)
+                {
+                    if (x < y || z < y || x > 10 - y || z > 10 - y)
+                    {
+
+                    }
+                    else
+                    {
+                        bricks.Add(Instantiate(brick, new Vector3(sPos.x + offset * x, sPos.y + offset * y, sPos.z + offset * z), Quaternion.Euler(0, x, 36)));
+                    }
+                }
+            }
+        }
     }
 }
