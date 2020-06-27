@@ -13,9 +13,11 @@ public class BrickSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameMaster gm = GameMaster.Instance;
         sPos = st.position; //find starting location from transform
         Spawn5(); //run spawn function
-        GameMaster.Instance.target = bricks[0]; //assuming brick list is set, sets the game master to disable camera follow
+        gm.target = bricks[0]; //assuming brick list is set, sets the game master to disable camera follow
+        gm.ToggleRigidBody();
         Camera.main.GetComponent<SmoothFollow>().target = bricks[0].transform; //Set camera to follow the first brick spawned
     }
 
@@ -92,7 +94,9 @@ public class BrickSpawner : MonoBehaviour
                     }
                     else
                     {
-                        bricks.Add(Instantiate(brick, new Vector3(sPos.x + offset * x, sPos.y + offset * y, sPos.z + offset * z), Quaternion.Euler(0, x, 36)));
+                        brick = Instantiate(brick, new Vector3(sPos.x + offset * x, sPos.y + offset * y, sPos.z + offset * z), Quaternion.Euler(x*6, y * 36, 0));
+                        bricks.Add(brick);
+
                     }
                 }
             }

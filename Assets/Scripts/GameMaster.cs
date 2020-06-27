@@ -9,11 +9,13 @@ public class GameMaster : MonoBehaviour
     public Text ForceIndicatorText;
     public Slider ForceSlider;
     public Button FindGeoButton;
+    public Text ToggleRigidBodyText;
     public float minTargetDist = 10;
     public float riseSpeed = 0.1f;
     [HideInInspector]
     public GameObject target = null;
     public BrickSpawner bs;
+    bool rbEnabled = true;
 
     private static GameMaster _instance;
     public static GameMaster Instance
@@ -66,7 +68,24 @@ public class GameMaster : MonoBehaviour
         foreach (GameObject go in bs.bricks) {
             go.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward.normalized * ForceSlider.value);
         }
+        rbEnabled = true; //adding force wakes the objects
     }
 
+    public void ToggleRigidBody()
+    {
+        rbEnabled = !rbEnabled;
+        foreach (GameObject go in bs.bricks)
+        {
+            if (rbEnabled)
+            {
+                go.GetComponent<Rigidbody>().WakeUp();
+            }
+            else
+            {
+                go.GetComponent<Rigidbody>().Sleep();
+            }
+        }
+        ToggleRigidBodyText.text = "Rigid Body: " + rbEnabled;
+    }
 
 }
