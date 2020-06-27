@@ -10,12 +10,14 @@ public class GameMaster : MonoBehaviour
     public Slider ForceSlider;
     public Button FindGeoButton;
     public Text ToggleRigidBodyText;
+    public Text ToggleBuoText;
     public float minTargetDist = 10;
     public float riseSpeed = 0.1f;
     [HideInInspector]
     public GameObject target = null;
     public BrickSpawner bs;
     bool rbEnabled = true;
+    bool bEnabled = true;
 
     private static GameMaster _instance;
     public static GameMaster Instance
@@ -85,7 +87,17 @@ public class GameMaster : MonoBehaviour
                 go.GetComponent<Rigidbody>().Sleep();
             }
         }
-        ToggleRigidBodyText.text = "Rigid Body: " + rbEnabled;
+        ToggleRigidBodyText.text = "RigidBody: " + rbEnabled;
+    }
+
+    public void ToggleBuoyancy()
+    {
+        bEnabled = !bEnabled;
+        foreach (GameObject go in bs.bricks)
+        {
+            go.GetComponent<BoatAlignNormal>().enabled = bEnabled;
+        }
+        ToggleBuoText.text = "Buoyancy: " + bEnabled;
     }
 
 }

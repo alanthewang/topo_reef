@@ -18,6 +18,7 @@ public class BrickSpawner : MonoBehaviour
         Spawn5(); //run spawn function
         gm.target = bricks[0]; //assuming brick list is set, sets the game master to disable camera follow
         gm.ToggleRigidBody();
+        gm.ToggleBuoyancy();
         Camera.main.GetComponent<SmoothFollow>().target = bricks[0].transform; //Set camera to follow the first brick spawned
     }
 
