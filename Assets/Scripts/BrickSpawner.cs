@@ -94,7 +94,7 @@ public class BrickSpawner : MonoBehaviour
                     }
                     else
                     {
-                        brick = Instantiate(brick, new Vector3(sPos.x + offset * x, sPos.y + offset * y, sPos.z + offset * z), Quaternion.Euler(x*6, y * 36, 0));
+                        brick = Instantiate(brick, new Vector3(sPos.x + offset * x, sPos.y + offset * y, sPos.z + offset * z), Quaternion.Euler(0, y * 36, z*72));
                         bricks.Add(brick);
 
                     }
