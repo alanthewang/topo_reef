@@ -7,13 +7,13 @@ using UnityEngine.UI;
 public class GameMaster : MonoBehaviour
 { 
     public Text ForceIndicatorText;
-    public Slider xslider;
-    public Slider yslider;
-    public Slider zslider;
+    public Slider ForceSlider;
     public Button FindGeoButton;
     public float minTargetDist = 10;
     public float riseSpeed = 0.1f;
-    public GameObject target;
+    [HideInInspector]
+    public GameObject target = null;
+    public BrickSpawner bs;
 
     private static GameMaster _instance;
     public static GameMaster Instance
@@ -33,7 +33,7 @@ public class GameMaster : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ForceIndicatorText.text = string.Format("Applied force {0:0},{1:0},{2:0}", xslider.value, yslider.value, zslider.value);
+        ForceIndicatorText.text = string.Format("Applied force magnitude {0:0}" , ForceSlider.value);
         if (Input.anyKey)
         {
             FindGeo(false);
@@ -53,17 +53,20 @@ public class GameMaster : MonoBehaviour
 
     public void FindGeo(bool enable)
     {
-        FindGeoButton.interactable = !enable;
-        Camera.main.GetComponent<LerpCam>().enabled = enable;
+        if (target != null)
+        {
+            FindGeoButton.interactable = !enable;
+            //Camera.main.GetComponent<LerpCam>().enabled = enable;
+            Camera.main.GetComponent<SmoothFollow>().enabled = enable;
+        }
     }
 
     public void ApplyForce()
     {
-        target.GetComponent<Rigidbody>().AddForce(new Vector3(xslider.value, yslider.value, zslider.value));
+        foreach (GameObject go in bs.bricks) {
+            go.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward.normalized * ForceSlider.value);
+        }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(target.transform.position, target.transform.position + new Vector3(xslider.value, yslider.value, zslider.value));        
-    }
+
 }
