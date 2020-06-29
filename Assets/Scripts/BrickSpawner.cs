@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class BrickSpawner : MonoBehaviour
 {
+    GameMaster gm;
     public Transform st;
     public GameObject brick;
     public List<GameObject> bricks;
@@ -13,14 +15,15 @@ public class BrickSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameMaster gm = GameMaster.Instance;
+        gm = GameMaster.Instance;
         sPos = st.position; //find starting location from transform
-        Spawn5(); //run spawn function
+        Spawn3(); //run spawn function
         gm.target = bricks[0]; //assuming brick list is set, sets the game master to disable camera follow
         gm.ToggleRigidBody();
         gm.ToggleBuoyancy();
         Camera.main.GetComponent<SmoothFollow>().target = bricks[0].transform; //Set camera to follow the first brick spawned
     }
+
 
     void Spawn1()
     {
@@ -97,7 +100,6 @@ public class BrickSpawner : MonoBehaviour
                     {
                         brick = Instantiate(brick, new Vector3(sPos.x + offset * x, sPos.y + offset * y, sPos.z + offset * z), Quaternion.Euler(0, y * 36, z*72));
                         bricks.Add(brick);
-
                     }
                 }
             }
