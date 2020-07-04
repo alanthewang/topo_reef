@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class BrickSpawner : MonoBehaviour
 {
-    GameMaster gm;
     public Transform st;
     public GameObject brick;
     public List<GameObject> bricks;
@@ -15,7 +13,7 @@ public class BrickSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gm = GameMaster.Instance;
+        GameMaster gm = GameMaster.Instance;
         sPos = st.position; //find starting location from transform
         Spawn3(); //run spawn function
         gm.target = bricks[0]; //assuming brick list is set, sets the game master to disable camera follow
@@ -24,11 +22,10 @@ public class BrickSpawner : MonoBehaviour
         Camera.main.GetComponent<SmoothFollow>().target = bricks[0].transform; //Set camera to follow the first brick spawned
     }
 
-
     void Spawn1()
     {
         bricks = new List<GameObject>();
-        for (int x = 0; x < 10; x++)
+        for (int x = 0; x < 100; x+=1)
         {
             bricks.Add(Instantiate(brick, new Vector3(sPos.x + 10 * x, sPos.y, sPos.z), Quaternion.identity));
         }
@@ -56,14 +53,14 @@ public class BrickSpawner : MonoBehaviour
             {
                 for (int z = 0; z < 10; z++)
                 {                    
-                    if (x < y || z < y || x > 10 -y || z > 10 -y)
-                    {
+                    //if (x < y || z < y || x > 10 -y || z > 10 -y)
+                    //{
 
-                    }
-                    else
-                    {
-                        bricks.Add(Instantiate(brick, new Vector3(sPos.x + offset * x, sPos.y + offset * y, sPos.z + offset * z), Quaternion.identity));
-                    }                  
+                    //}
+                    //else
+                    //{
+                    bricks.Add(Instantiate(brick, new Vector3(sPos.x + offset * x, sPos.y + offset * y, sPos.z + offset * z), Quaternion.identity));
+                    //}                  
                 }
             }
         }
@@ -100,6 +97,7 @@ public class BrickSpawner : MonoBehaviour
                     {
                         brick = Instantiate(brick, new Vector3(sPos.x + offset * x, sPos.y + offset * y, sPos.z + offset * z), Quaternion.Euler(0, y * 36, z*72));
                         bricks.Add(brick);
+
                     }
                 }
             }

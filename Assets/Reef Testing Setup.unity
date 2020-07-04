@@ -882,6 +882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 809409802}
   - component: {fileID: 809409801}
+  - component: {fileID: 809409803}
   m_Layer: 0
   m_Name: BrickSpawner
   m_TagString: Untagged
@@ -902,7 +903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   st: {fileID: 896729708}
-  brick: {fileID: 3251789243285620777, guid: 425100b3df386374490ef0a7502b327b, type: 3}
+  brick: {fileID: 1700461726788506995, guid: b04d6a55dcad8484cb6d3b952b9df10a, type: 3}
   bricks: []
 --- !u!4 &809409802
 Transform:
@@ -918,6 +919,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &809409803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809409800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c716bbcd70a7ba44e9468d5809650487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &896729707
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,7 +955,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896729707}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 113.4, y: -2.3, z: -54.1}
+  m_LocalPosition: {x: 76.4, y: 6, z: 55.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
